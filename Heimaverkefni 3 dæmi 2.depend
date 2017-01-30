@@ -1,4 +1,6 @@
 # depslib dependency file v1.0
-1485798205 source:c:\users\jonni\documents\skólinn\hÍ\m.sc hugbúnaðarverkfræði\Önn 2\tölvunarfræði 2\heimaverkefni 3 dæmi 2\kennitala.cpp
+1485817603 source:c:\users\jonni\documents\skólinn\hÍ\m.sc hugbúnaðarverkfræði\Önn 2\tölvunarfræði 2\heimaverkefni 3 dæmi 2\kennitala.cpp
 	<iostream>
+	<string>
+	<sstream>
 
