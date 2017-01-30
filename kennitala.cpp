@@ -1,27 +1,70 @@
 #include <iostream>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
+// Skilgreinum fallið isLegal, sem skilar út sönnu eða
+// ósönnu eftir því hvort að kennitala sé lögleg eða ekki.
 bool isLegal (string kennitala) {
     int tiu = kennitala.size();
+    // Við komumst bara inn í útreikningana ef að 10 tölur hafa verið slegnar inn
     if (tiu == 10){
+        // Skilgreinum stærðir sem við þurfum að nota í for-lykkju
         int summa = 0;
         int runa = 3;
         char vartala = '0';
         int ivartala = 0;
+
+        // Látum for-lykkjuna ganga 8 hringi og reikna fyrir eina af
+        // fyrstu 8 tölunum í hverjum hring.
         for (int i = 0; i < 8; i++) {
+
+            // Notum vartala og ivartala til að breyta gefnum streng yfir í heiltölur
             vartala = kennitala[i];
             ivartala = (int)vartala - 48;
+
             summa += ivartala*runa;
             runa = runa -1;
+
+            // Talnarunan sem við erum að vinna með er 3-2-7-6-5-4-3-2.
+            // Við létum hana byrja í þremur og í lok annarar umferðar í
+            // lykkjunni, þá hækkum við upp í 7.
             if (runa == 1) {
                 runa =7;
             }
         }
+
+        // finnum leifina með modulus
         int afgangur = summa % 11;
+
+        // Finnum hina eiginlegu vartölu, hér skýrð tekktala
         int tekkTala = 11-afgangur;
+
+        // Ef við fáum út 11, þá eigum við að nota 0 í staðinn
         if (tekkTala == 11) {
             tekkTala = 0;
+        }
+
+        // Ef við fáum út 10, þá þarf að hækka raðtöluna um 1 og reina út nýja vartölu
+        if (tekkTala == 10) {
+            int temp = 0;
+            vartala = kennitala[6];
+            ivartala = (int)vartala - 48;
+            temp = 10*ivartala;
+            vartala = kennitala[7];
+            ivartala = (int)vartala - 48;
+            temp += ivartala;
+            temp++; // Hækka raðtöluna um 1
+
+
+            string nytt = static_cast<ostringstream*>( &(ostringstream() << temp) )->str();
+
+
+            kennitala[6] = nytt[0]; // Set nýju gildin á raðtölunni inn í kennitöluna
+            kennitala[7] = nytt[1];
+            bool nyKennitala = isLegal(kennitala); // Keyrum forritið endurkvæmt
+            return nyKennitala; //skilum niðurstöðunni úr endurkvæmu keyrslunni á isLegal
         }
         vartala = kennitala[8];
         ivartala = (int)vartala - 48;
