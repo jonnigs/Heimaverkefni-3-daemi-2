@@ -4,12 +4,10 @@ using namespace std;
 
 // Skilgreinum fallið isLegal, sem skilar út sönnu eða
 // ósönnu eftir því hvort að kennitala sé lögleg eða ekki.
-bool isLegal (string kennitala)
-{
+bool isLegal (string kennitala) {
     int tiu = kennitala.size();
     // Við komumst bara inn í útreikningana ef að 10 tölur hafa verið slegnar inn
-    if (tiu == 10)
-    {
+    if (tiu == 10) {
         // Skilgreinum stærðir sem við þurfum að nota í for-lykkju
         int summa = 0;
         int runa = 3;
@@ -18,11 +16,9 @@ bool isLegal (string kennitala)
 
         // Látum for-lykkjuna ganga 8 hringi og reikna fyrir eina af
         // fyrstu 8 tölunum í hverjum hring.
-        for (int i = 0; i < 8; i++)
-        {
+        for (int i = 0; i < 8; i++) {
             // Notum vartala og ivartala til að breyta gefnum streng yfir í heiltölur
-            for (int i = 0; i < 8; i++)
-            {
+            for (int i = 0; i < 8; i++) {
                 vartala = kennitala[i];
                 ivartala = (int)vartala - 48;
                 summa += ivartala*runa;
@@ -48,17 +44,14 @@ bool isLegal (string kennitala)
 
                 // Ef við fáum út 10, þá þarf að hækka raðtöluna um 1 og reina út nýja vartölu,
                 // sem gerir kennitöluna sem var slegin inn ekki löglega.
-                if (tekkTala == 10)
-                {
+                if (tekkTala == 10) {
                     return false;
                 }
 
                 vartala = kennitala[8];
                 ivartala = (int)vartala - 48;
-                if (ivartala == tekkTala)
-                {
-                    if (kennitala[9] == '8' || kennitala[9] == '9' || kennitala[9] == '0' )
-                    {
+                if (ivartala == tekkTala) {
+                    if (kennitala[9] == '8' || kennitala[9] == '9' || kennitala[9] == '0' ) {
                         return true;
                     }
                 }
@@ -68,19 +61,17 @@ bool isLegal (string kennitala)
     }
 }
 
-        int main()
-        {
-            string kennit;
-            cout << "Sladu inn 10 stafa kennitolu: " << endl;
-            cin >> kennit;
-            bool nidurstada = isLegal(kennit);
-            if (nidurstada == true)
-            {
-                cout << "Logleg kennitala!";
-            }
-            else
-            {
-                cout << "Ekki logleg kennitala";
-            }
-            return 0;
-        }
+// main fallið biður um kennitölu, keyrir isLegal og skilar svo niðurstöðunni með texta.
+int main() {
+    string kennit;
+    cout << "Sladu inn 10 stafa kennitolu: " << endl;
+    cin >> kennit;
+    bool nidurstada = isLegal(kennit);
+    if (nidurstada == true) {
+        cout << "Logleg kennitala!";
+    }
+    else {
+        cout << "Ekki logleg kennitala";
+    }
+    return 0;
+}
